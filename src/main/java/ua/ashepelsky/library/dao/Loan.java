@@ -7,6 +7,8 @@ public class Loan {
     private Integer id;
     private Integer bookId;
     private String dueBack;
+    private Boolean isBorrowed;
+    private String customerName;
 
     public Integer getId() {
         return id;
@@ -33,13 +35,26 @@ public class Loan {
     }
 
     public boolean isReturned() {
-        return isReturned;
+        return isBorrowed;
     }
 
     public void setReturned(boolean returned) {
-        isReturned = returned;
+        isBorrowed = returned;
     }
 
-    boolean isReturned;
+    public Boolean getBorrowed() {
+        return isBorrowed;
+    }
 
+    public void setBorrowed(Boolean borrowed) {
+        isBorrowed = borrowed;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 }
