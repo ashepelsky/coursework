@@ -1,0 +1,13 @@
+CREATE TABLE `library`.`loans` (
+  `loanId` INT NOT NULL AUTO_INCREMENT,
+  `bookId` INT NOT NULL,
+  `dueBack` VARCHAR(45) NOT NULL,
+  `isBorrowed` DOUBLE NOT NULL,
+  `customerName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`loanId`),
+  INDEX `bookId_idx` (`bookId` ASC),
+  CONSTRAINT `bookId`
+    FOREIGN KEY (`bookId`)
+    REFERENCES `library`.`books` (`bookId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);

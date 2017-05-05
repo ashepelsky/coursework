@@ -1,0 +1,6 @@
+CREATE TABLE `library`.`Books` (
+  `bookId` INT NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(45) NOT NULL,
+  `author` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`bookId`),
+  UNIQUE INDEX `bookId_UNIQUE` (`bookId` ASC));

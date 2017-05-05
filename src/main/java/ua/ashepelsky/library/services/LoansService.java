@@ -1,6 +1,6 @@
 package ua.ashepelsky.library.services;
 
-import ua.ashepelsky.library.dao.Loan;
+import ua.ashepelsky.library.db.Loan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by ashepelsky on 5/3/2017.
  */
-public class LoansManager {
+public class LoansService {
 
     public List<Loan> getAll() {
         return new ArrayList<Loan>();

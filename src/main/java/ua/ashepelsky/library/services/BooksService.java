@@ -1,6 +1,6 @@
 package ua.ashepelsky.library.services;
 
-import ua.ashepelsky.library.dao.Book;
+import ua.ashepelsky.library.db.Book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by ashepelsky on 5/3/2017.
  */
-public class BooksManager {
+public class BooksService {
 
-    public List<Book> getAll (){
+    public List<Book> getAll() {
         return new ArrayList<Book>();
     }
 

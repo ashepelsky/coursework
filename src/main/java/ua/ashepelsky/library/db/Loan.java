@@ -1,10 +1,22 @@
-package ua.ashepelsky.library.dao;
+package ua.ashepelsky.library.db;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Created by ashepelsky on 5/3/2017.
  */
-public class Loan {
+
+@Entity
+@Table(name = "loans")
+public class Loan implements Serializable {
+    @Id
+    @Column(name = "bookId")
     private Integer id;
+    @Column(insertable = false, updatable = false)
     private Integer bookId;
     private String dueBack;
     private Boolean isBorrowed;

@@ -1,11 +1,21 @@
-package ua.ashepelsky.library.dao;
+package ua.ashepelsky.library.db;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by ashepelsky on 5/3/2017.
  */
-public class Book {
+
+@Entity
+@Table(name = "books")
+public class Book implements Serializable {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bookId")
     private Integer id;
+    @Column(name = "title")
     private String title;
+    @Column(name = "author")
     private String author;
 
     public Integer getId() {
