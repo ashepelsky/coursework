@@ -11,6 +11,6 @@ public interface BookDao {
 
     void delete(Integer id);
 
-    List<Book> getAll();
+    List getAll();
 
 }

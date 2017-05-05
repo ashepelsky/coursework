@@ -17,8 +17,9 @@ public class BookDaoImpl implements BookDao {
 
     public void create(Book book) {
         session.beginTransaction();
-        session.save(book);
-        session.getTransaction().commit();
+        session.saveOrUpdate(book);
+//        session.getTransaction().commit();
+        session.close();
 
     }
 
@@ -26,7 +27,7 @@ public class BookDaoImpl implements BookDao {
 
     }
 
-    public List<Book> getAll() {
-        return null;
+    public List getAll() {
+        return session.createQuery("SELECT e FROM Book e").getResultList();
     }
 }
