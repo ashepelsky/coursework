@@ -1,9 +1,6 @@
 package ua.ashepelsky.library.db;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,10 +10,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "loans")
 public class Loan implements Serializable {
-    @Id
-    @Column(name = "bookId")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "loanId")
     private Integer id;
-    @Column(insertable = false, updatable = false)
     private Integer bookId;
     private String dueBack;
     private Boolean isBorrowed;
@@ -44,14 +40,6 @@ public class Loan implements Serializable {
 
     public void setDueBack(String dueBack) {
         this.dueBack = dueBack;
-    }
-
-    public boolean isReturned() {
-        return isBorrowed;
-    }
-
-    public void setReturned(boolean returned) {
-        isBorrowed = returned;
     }
 
     public Boolean getBorrowed() {

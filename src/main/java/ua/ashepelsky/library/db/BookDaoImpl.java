@@ -1,7 +1,9 @@
 package ua.ashepelsky.library.db;
 
 import org.hibernate.Session;
+import org.springframework.context.annotation.Bean;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -18,16 +20,18 @@ public class BookDaoImpl implements BookDao {
     public void create(Book book) {
         session.beginTransaction();
         session.saveOrUpdate(book);
-//        session.getTransaction().commit();
-        session.close();
+        session.getTransaction().commit();
+
 
     }
 
     public void delete(Integer id) {
-
+        session.beginTransaction();
+        session.createQuery("DELETE FROM Book b WHERE b.id = :id").setParameter("id",id).executeUpdate();
+        session.getTransaction().commit();
     }
 
     public List getAll() {
-        return session.createQuery("SELECT e FROM Book e").getResultList();
+        return session.createQuery("SELECT b FROM Book b").getResultList();
     }
 }

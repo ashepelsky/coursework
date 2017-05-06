@@ -9,7 +9,7 @@ public interface LoanDao {
 
     void create(Loan loan);
 
-    void borrow(Boolean isBorrowed);
+    void unborrow(Integer bookId);
 
     List<Loan> getAll();
 }

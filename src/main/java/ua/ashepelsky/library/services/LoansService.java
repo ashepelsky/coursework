@@ -1,6 +1,7 @@
 package ua.ashepelsky.library.services;
 
 import ua.ashepelsky.library.db.Loan;
+import ua.ashepelsky.library.db.LoanDaoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +11,14 @@ import java.util.List;
  */
 public class LoansService {
 
+    LoanDaoImpl loanDao = new LoanDaoImpl();
+
     public List<Loan> getAll() {
         return new ArrayList<Loan>();
     }
 
-    public boolean isBookBorrowed(Integer bookId) {
-        return false;
-    }
-
-    public void borrowBook(Integer bookId) {
-
+    public void borrowBook(Loan loan) {
+        loanDao.create(loan);
     }
 
     public void unborrowBook(Integer bookId) {
