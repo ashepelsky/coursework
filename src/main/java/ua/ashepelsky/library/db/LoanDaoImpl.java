@@ -29,6 +29,6 @@ public class LoanDaoImpl implements LoanDao {
     }
 
     public List<Loan> getAll() {
-        return session.createQuery("SELECT b FROM Book b").getResultList();
+        return session.createQuery("SELECT b FROM Loan b").getResultList();
     }
 }
