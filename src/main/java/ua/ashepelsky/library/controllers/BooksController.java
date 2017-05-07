@@ -15,7 +15,7 @@ import java.util.Map;
 public class BooksController {
 
     @Autowired
-    BooksService booksService;
+    private BooksService booksService;
 
     @RequestMapping("/api/books")
     public Map<String, Object> getBooks() {

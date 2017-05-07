@@ -28,7 +28,8 @@ public class LoanDaoImpl implements LoanDao {
         session.getTransaction().commit();
     }
 
-    public List<Loan> getAll() {
+    public List getAll() {
+        session.clear();
         return session.createQuery("SELECT b FROM Loan b").getResultList();
     }
 }

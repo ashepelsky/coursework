@@ -32,6 +32,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     public List getAll() {
+        session.clear();
         return session.createQuery("SELECT b FROM Book b").getResultList();
     }
 }

@@ -11,5 +11,5 @@ public interface LoanDao {
 
     void unborrow(Integer bookId);
 
-    List<Loan> getAll();
+    List getAll();
 }
