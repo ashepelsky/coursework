@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--Script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body ng-app="general-data">
+<div ng-controller="home" ng-cloak class="ng-cloak" class="row">
+    <table>
+        <tr>
+            <th>id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Is Free</th>
+        </tr>
+        <tr ng-repeat="x in model.books">
+            <td>{{x.book.id}}</td>
+            <td>{{x.book.title}}</td>
+            <td>{{x.book.author}}</td>
+            <td>{{x.borrowed}}</td>
+        </tr>
+    </table>
+</div>
+<script src="js/get-data.js"></script>
+</body>
+</html>
