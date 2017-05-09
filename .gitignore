@@ -14,3 +14,4 @@ hs_err_pid*
 $intellij files
 workspace.xml
 libraries
+target

@@ -17,14 +17,18 @@ public class LoanDaoImpl implements LoanDao {
 
 
     public void create(Loan loan) {
-        session.beginTransaction();
+        try {
+            session.beginTransaction();
+        } catch (IllegalStateException e) {
+            //session already active
+        }
         session.saveOrUpdate(loan);
         session.getTransaction().commit();
     }
 
     public void unborrow(Integer bookId) {
         session.beginTransaction();
-        session.createQuery("UPDATE Loan l SET l.isBorrowed = false WHERE l.bookId = :bookId").setParameter("bookId",bookId).executeUpdate();
+        session.createQuery("UPDATE Loan l SET l.isBorrowed = false WHERE l.bookId = :bookId").setParameter("bookId", bookId).executeUpdate();
         session.getTransaction().commit();
     }
 

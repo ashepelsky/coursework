@@ -11,31 +11,35 @@
 
 <body ng-app="general-data">
 <div ng-controller="home" ng-cloak class="ng-cloak" class="row">
-    <select ng-model="view">
+    <select multiple class="input-lg form-control" ng-model="view">
         <option value="books">Books list</option>
         <option value="loans">Loans list</option>
         <option value="book">Add/remove Book</option>
         <option value="loan">Borrow/unborrow Book</option>
     </select>
     <div ng-if="view == 'books'" class="books-list">
-        <table>
+        <div class="input-group">
+            <div class="input-group-addon">Filter</div>
+            <input type="text" placeholder=" Filter by..." ng-model="filt" class="form-control">
+        </div>
+        <table class="table table-hover">
             <tr>
                 <th>id</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Is Free</th>
             </tr>
-            <tr ng-repeat="x in booksModel.books">
+            <tr ng-repeat="x in booksModel.books | filter : filt" ng-click="loanBook(x.book.id, x.borrowed)">
                 <td>{{x.book.id}}</td>
                 <td>{{x.book.title}}</td>
                 <td>{{x.book.author}}</td>
-                <td>{{!x.borrowed}}</td>
+                <td ng-class="!x.borrowed ? 'bg-success' : 'bg-danger'">{{!x.borrowed}}</td>
             </tr>
         </table>
     </div>
 
     <div ng-if="view == 'loans'" class="loans-list">
-        <table>
+        <table class="table table-hover">
             <tr>
                 <th>Loan ID</th>
                 <th>Book ID</th>
@@ -43,7 +47,7 @@
                 <th>Customer Name</th>
                 <th>Is Book Borrowed</th>
             </tr>
-            <tr ng-repeat="x in loansModel.loans">
+            <tr ng-repeat="x in loansModel.loans" ng-click="loanBook(x.bookId, x.borrowed)">
                 <td>{{x.id}}</td>
                 <td>{{x.bookId}}</td>
                 <td>{{x.dueBack}}</td>
@@ -53,21 +57,22 @@
         </table>
     </div>
 
-    <div ng-if="view == 'book'" class="book">
-        Book Title: <input name="bookTitle" ng-model="newBook.title" type="text"><br>
-        Book Author: <input name ="bookAuthor" ng-model="newBook.author" type="text"><br>
-        <button ng-click="createBook()">Create Book</button>
-        Remove Book ID: <input name="removeID" ng-model="removalId.id" type="text"><br>
-        <button ng-click="deleteBook()">Remove Book</button>
+    <div ng-if="view == 'book'" class="form center-block">
+        <input name="bookTitle" placeholder="Book Title" ng-model="newBook.title" type="text" class="form-control">
+        <input name="bookAuthor" placeholder="Book Author" ng-model="newBook.author" type="text" class="form-control">
+        <button ng-click="createBook()" class="btn btn-primary btn-block">Create Book</button>
+        <input name="removeID" placeholder="Remove Book ID" ng-model="removalId.id" type="text" class="form-control">
+        <button ng-click="deleteBook()" class="btn btn-default btn-block">Remove Book</button>
     </div>
 
-    <div ng-if="view == 'loan'" class="book">
-        Book ID: <input name="loanBookId" ng-model="newLoan.bookId" type="text"><br>
-        Due Back: <input name ="dueBackDate" ng-model="newLoan.dueBack" type="text"><br>
-        Customer Name: <input name ="customerName" ng-model="newLoan.customerName" type="text"><br>
-        <button ng-click="createLoan()">Create Loan</button>
-        Un Borrow Book ID: <input name="removeID" ng-model="removalId.id" type="text"><br>
-        <button ng-click="unborrow()">Unborrow Book</button>
+    <div ng-if="view == 'loan'" class="form center-block">
+        <input name="loanBookId" placeholder="Book ID" ng-model="newLoan.bookId" type="text" class="form-control">
+        <input name="dueBackDate" placeholder="Due Back" ng-model="newLoan.dueBack" type="text" class="form-control">
+        <input name="customerName" placeholder="Customer Name" ng-model="newLoan.customerName" type="text"
+               class="form-control">
+        <button ng-click="createLoan()" class="btn btn-primary btn-block">Create Loan</button>
+        <input name="removeID" placeholder="Un Borrow Book ID" ng-model="removalId.id" type="text" class="form-control">
+        <button ng-click="unborrow()" class="btn btn-default btn-block">Unborrow Book</button>
     </div>
 </div>
 <script src="js/get-data.js"></script>

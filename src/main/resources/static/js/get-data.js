@@ -12,21 +12,15 @@ angular.module('general-data', [])
             $scope.loansModel = response;
         });
 
-        $scope.getX =  function() {
-            $http({
-                method: 'GET',
-                url: "/api/" + $scope.x
-           }).success(function(response) {
-               $scope.xData = response;
-
-               $scope.xData.functionValue = Math.cos(-2*$scope.x)/4;
-               $scope.xData.partialError = Math.abs($scope.xData.theoreticalError)
-
-               //out errors
-
-
-           });
-        };
+        $scope.loanBook = function(id, borrowed) {
+            if(!borrowed) {
+                $scope.newLoan.bookId = id;
+                $scope.view = "loan";
+            } else {
+                $scope.removalId.id = id;
+                $scope.view = "loan";
+            }
+        }
 
         $scope.createBook =  function() {
 

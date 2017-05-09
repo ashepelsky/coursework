@@ -18,7 +18,11 @@ public class BookDaoImpl implements BookDao {
     }
 
     public void create(Book book) {
-        session.beginTransaction();
+        try {
+            session.beginTransaction();
+        } catch (IllegalStateException e) {
+            // transaction already active
+        }
         session.saveOrUpdate(book);
         session.getTransaction().commit();
 
@@ -27,7 +31,7 @@ public class BookDaoImpl implements BookDao {
 
     public void delete(Integer id) {
         session.beginTransaction();
-        session.createQuery("DELETE FROM Book b WHERE b.id = :id").setParameter("id",id).executeUpdate();
+        session.createQuery("DELETE FROM Book b WHERE b.id = :id").setParameter("id", id).executeUpdate();
         session.getTransaction().commit();
     }
 
