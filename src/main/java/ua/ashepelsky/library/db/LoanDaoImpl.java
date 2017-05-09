@@ -24,7 +24,7 @@ public class LoanDaoImpl implements LoanDao {
 
     public void unborrow(Integer bookId) {
         session.beginTransaction();
-        session.createQuery("UPDATE Loan l SET l.isBorrowed = false").executeUpdate();
+        session.createQuery("UPDATE Loan l SET l.isBorrowed = false WHERE l.bookId = :bookId").setParameter("bookId",bookId).executeUpdate();
         session.getTransaction().commit();
     }
 

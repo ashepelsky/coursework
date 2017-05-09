@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <!--CSS-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--Script-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -11,20 +11,64 @@
 
 <body ng-app="general-data">
 <div ng-controller="home" ng-cloak class="ng-cloak" class="row">
-    <table>
-        <tr>
-            <th>id</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Is Free</th>
-        </tr>
-        <tr ng-repeat="x in model.books">
-            <td>{{x.book.id}}</td>
-            <td>{{x.book.title}}</td>
-            <td>{{x.book.author}}</td>
-            <td>{{x.borrowed}}</td>
-        </tr>
-    </table>
+    <select ng-model="view">
+        <option value="books">Books list</option>
+        <option value="loans">Loans list</option>
+        <option value="book">Add/remove Book</option>
+        <option value="loan">Borrow/unborrow Book</option>
+    </select>
+    <div ng-if="view == 'books'" class="books-list">
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Is Free</th>
+            </tr>
+            <tr ng-repeat="x in booksModel.books">
+                <td>{{x.book.id}}</td>
+                <td>{{x.book.title}}</td>
+                <td>{{x.book.author}}</td>
+                <td>{{!x.borrowed}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-if="view == 'loans'" class="loans-list">
+        <table>
+            <tr>
+                <th>Loan ID</th>
+                <th>Book ID</th>
+                <th>Due Back Date</th>
+                <th>Customer Name</th>
+                <th>Is Book Borrowed</th>
+            </tr>
+            <tr ng-repeat="x in loansModel.loans">
+                <td>{{x.id}}</td>
+                <td>{{x.bookId}}</td>
+                <td>{{x.dueBack}}</td>
+                <td>{{x.customerName}}</td>
+                <td>{{x.borrowed}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div ng-if="view == 'book'" class="book">
+        Book Title: <input name="bookTitle" ng-model="newBook.title" type="text"><br>
+        Book Author: <input name ="bookAuthor" ng-model="newBook.author" type="text"><br>
+        <button ng-click="createBook()">Create Book</button>
+        Remove Book ID: <input name="removeID" ng-model="removalId.id" type="text"><br>
+        <button ng-click="deleteBook()">Remove Book</button>
+    </div>
+
+    <div ng-if="view == 'loan'" class="book">
+        Book ID: <input name="loanBookId" ng-model="newLoan.bookId" type="text"><br>
+        Due Back: <input name ="dueBackDate" ng-model="newLoan.dueBack" type="text"><br>
+        Customer Name: <input name ="customerName" ng-model="newLoan.customerName" type="text"><br>
+        <button ng-click="createLoan()">Create Loan</button>
+        Un Borrow Book ID: <input name="removeID" ng-model="removalId.id" type="text"><br>
+        <button ng-click="unborrow()">Unborrow Book</button>
+    </div>
 </div>
 <script src="js/get-data.js"></script>
 </body>
